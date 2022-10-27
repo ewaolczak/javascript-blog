@@ -35,11 +35,11 @@ const titleClickHandler = function (event) {
 	console.log('articleSelector:', articleSelector);
 
 	/* [IN PROGRESS] find the correct article using the selector (value of 'href' attribute) */
-	const targetArticle = document.querySelector(articleSelector); //DLACZEGO TO NIE DZIAŁA I CONSOLE.LOG DAJE KOMUNIKAT undefined??
-	console.log('tergetArticle:'.targetArticle);
+	const targetArticle = document.querySelector(articleSelector);
+	console.log('tergetArticle:', targetArticle);
 
 	/* [IN PROGRESS] add class 'active' to the correct article */
-	// targetArticle.classList.add('active');
+	targetArticle.classList.add('active');
 };
 
 const links = document.querySelectorAll('.titles a');
