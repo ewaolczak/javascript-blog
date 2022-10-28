@@ -47,14 +47,13 @@ document.getElementById('test-button').addEventListener('click', function () {
 		optTitleSelectior = '.post-title',
 		optTitleListSelector = '.titles';
 
+	function removeTitleList() {
+		const titleList = document.querySelector(optTitleListSelector);
+		titleList.innerHTML = "";
+	}
+
 	function generateTitleLinks() {
 		/* [DONE] remove contents of titleList */
-		const titleList = document.querySelector(optTitleListSelector);
-
-		function removeTitleList() {
-			titleList.innerHTML = '';
-		}
-
 		removeTitleList();
 
 		/* [DONE] for each article */
@@ -84,6 +83,8 @@ document.getElementById('test-button').addEventListener('click', function () {
 			/* [DONE] insert link into titleList */
 			html = html + linkHTML;
 		}
+
+		const titleList = document.querySelector(optTitleListSelector);
 		titleList.innerHTML = html;
 
 		const links = document.querySelectorAll('.titles a');
