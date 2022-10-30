@@ -46,11 +46,13 @@ document.getElementById('test-button').addEventListener('click', function () {
     optTitleSelectior = '.post-title',
     optTitleListSelector = '.titles';
 
+  // eslint-disable-next-line no-inner-declarations
   function removeTitleList() {
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
   }
 
+  // eslint-disable-next-line no-inner-declarations
   function generateTitleLinks() {
     /* [DONE] remove contents of titleList */
     removeTitleList();
