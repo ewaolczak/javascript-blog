@@ -49,7 +49,7 @@ document.getElementById('test-button').addEventListener('click', function () {
 
 	function removeTitleList() {
 		const titleList = document.querySelector(optTitleListSelector);
-		titleList.innerHTML = "";
+		titleList.innerHTML = '';
 	}
 
 	function generateTitleLinks() {
