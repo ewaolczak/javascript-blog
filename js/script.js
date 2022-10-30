@@ -46,14 +46,12 @@ document.getElementById('test-button').addEventListener('click', function () {
     optTitleSelectior = '.post-title',
     optTitleListSelector = '.titles';
 
-  // eslint-disable-next-line no-inner-declarations
-  function removeTitleList() {
+  const removeTitleList = function () {
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
-  }
+  };
 
-  // eslint-disable-next-line no-inner-declarations
-  function generateTitleLinks() {
+  const generateTitleLinks = function () {
     /* [DONE] remove contents of titleList */
     removeTitleList();
 
@@ -95,7 +93,7 @@ document.getElementById('test-button').addEventListener('click', function () {
       // console.log(link);
       link.addEventListener('click', titleClickHandler);
     }
-  }
+  };
 
   generateTitleLinks();
 }
