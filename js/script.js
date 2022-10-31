@@ -113,20 +113,29 @@ document.getElementById('test-button').addEventListener('click', function () {
 
       /* get tags from data-tags attribute */
       const articleTags = article.getAttribute('data-tags');
-      console.log('articleTags:', articleTags);
+      // console.log('articleTags:', articleTags);
 
       /* split tags into array */
       const articleTagsArray = articleTags.split(' ');
-      console.log('articleTagsArray:', articleTagsArray);
+      // console.log('articleTagsArray:', articleTagsArray);
 
       /* START LOOP: for each tag */
       for (let tag of articleTagsArray) {
         console.log('tag:', tag);
+
         /* generate HTML of the link */
+
+        const tagHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+
         /* add generated code to html variable */
+        html = html + tagHTML;
+        console.log('html:', html);
+
         /* END LOOP: for each tag */
       }
       /* insert HTML of all the links into the tags wrapper */
+      tagsWrapper.innerHTML = html;
+
       /* END LOOP: for every article: */
     }
   };
