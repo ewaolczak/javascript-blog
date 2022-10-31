@@ -148,9 +148,11 @@ document.getElementById('test-button').addEventListener('click', function () {
 
     /* [DONE] make new constant named "clickedElement" and give it the value of "this" */
     const clickedElement = this;
+    console.log('clickedElement:', clickedElement);
 
     /* [DONE] make a new constant "href" and read the attribute "href" of the clicked element */
     const href = clickedElement.getAttribute('href');
+    console.log('href:', href);
 
     /* [DONE] make a new constant "tag" and extract tag from the "href" constant */
     const tag = href.replace('#tag-', '');
@@ -185,9 +187,16 @@ document.getElementById('test-button').addEventListener('click', function () {
 
   const addClickListenersToTags = function () {
     /* find all links to tags */
+    const tagLinks = document.querySelectorAll('.post-tags .list a');
+    console.log('tagLinks:', tagLinks);
+
     /* START LOOP: for each link */
-    /* add tagClickHandler as event listener for that link */
-    /* END LOOP: for each link */
+    for (let tagLink of tagLinks) {
+      /* add tagClickHandler as event listener for that link */
+      tagLink.addEventListener('click', tagClickHandler);
+
+      /* END LOOP: for each link */
+    }
   };
 
   generateTitleLinks();
