@@ -45,7 +45,8 @@ document.getElementById('test-button').addEventListener('click', function () {
   const optArticleSelector = '.post',
     optTitleSelectior = '.post-title',
     optTitleListSelector = '.titles',
-    optArticleTagSelector = '.post-tags .list';
+    optArticleTagSelector = '.post-tags .list',
+    optArticleAuthorSelector = '.post .post-author';
 
   const removeTitleList = function () {
     const titleList = document.querySelector(optTitleListSelector);
@@ -107,7 +108,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     for (let article of articles) {
       /* find tags wrapper */
       const tagsWrapper = article.querySelector(optArticleTagSelector);
-      // console.log('tagsWrapper:', tagsWrapper);
+      console.log('tagsWrapper:', tagsWrapper);
 
       /* [DONE] make html variable with empty string */
       let html = '';
@@ -122,7 +123,7 @@ document.getElementById('test-button').addEventListener('click', function () {
 
       /* [DONE] START LOOP: for each tag */
       for (let tag of articleTagsArray) {
-        // console.log('tag:', tag);
+        console.log('tag:', tag);
 
         /* [DONE] generate HTML of the link */
 
@@ -200,14 +201,38 @@ document.getElementById('test-button').addEventListener('click', function () {
 
   const generateAuthors = function () {
     /* find all articles */
+    const articles = document.querySelectorAll(optArticleSelector);
+
     /* START LOOP: fore every article */
-    /* find author wrapper */
-    /* make html variable with empty string */
-    /* get authors from data-authors attribute */
-    /* START LOOP: for each author */
-    /* generate HTML of the link */
-    /* add generated code to html variable */
-    /* insert HTML of all the links into the authors wrapper */
+    for (let article of articles) {
+      console.log('article', article);
+
+      /* find author wrapper */
+      const authorWrapper = article.querySelector(optArticleAuthorSelector);
+      console.log('authorWrapper:', authorWrapper);
+
+      /* make html variable with empty string */
+      let html = '';
+
+      /* get authors from data-authors attribute */
+      const authors = article.getAttribute('data-author');
+
+      /* START LOOP: for each author */
+      for (let author of authors) {
+        console.log('author:', author);
+
+        /* generate HTML of the link */
+        const authorHTML =
+          '<li><a href="#' + author + '">' + author + '</a></li>';
+
+        /* add generated code to html variable */
+        html = html + authorHTML;
+        console.log('html:', html);
+        /* END LOOP: for every author */
+      }
+      /* insert HTML of all the links into the authors wrapper */
+      /* END LOOP: for every article */
+    }
   };
 
   // const authorClickHandler(event){
