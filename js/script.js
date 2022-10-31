@@ -8,8 +8,8 @@ document.getElementById('test-button').addEventListener('click', function () {
 });*/
 
   const titleClickHandler = function (event) {
-    console.log('Link was clicked!');
-    console.log('event:', event);
+    // console.log('Link was clicked!');
+    // console.log('event:', event);
 
     /* [DONE] remove class 'active' from all article links  */
     const activeLinks = document.querySelectorAll('.titles a.active');
@@ -21,7 +21,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     /* [DONE] add class 'active' to the clicked link */
     event.preventDefault();
     const clickedElement = this;
-    console.log('clickedElement:', clickedElement);
+    // console.log('clickedElement:', clickedElement);
     clickedElement.classList.add('active');
 
     /* [DONE] remove class 'active' from all articles */
@@ -33,11 +33,11 @@ document.getElementById('test-button').addEventListener('click', function () {
 
     /* [DONE] get 'href' attribute from the clicked link */
     const articleSelector = clickedElement.getAttribute('href');
-    console.log('articleSelector:', articleSelector);
+    // console.log('articleSelector:', articleSelector);
 
     /* [DONE] find the correct article using the selector (value of 'href' attribute) */
     const targetArticle = document.querySelector(articleSelector);
-    console.log('tergetArticle:', targetArticle);
+    // console.log('tergetArticle:', targetArticle);
 
     /* [DONE] add class 'active' to the correct article */
     targetArticle.classList.add('active');
@@ -98,17 +98,37 @@ document.getElementById('test-button').addEventListener('click', function () {
 
   const generateTags = function () {
     /* find all articles */
+    const articles = document.querySelectorAll(optArticleSelector);
+
     /* START LOOP: for every article: */
-    /* find tags wrapper */
-    /* make html variable with empty string */
-    /* get tags from data-tags attribute */
-    /* split tags into array */
-    /* START LOOP: for each tag */
-    /* generate HTML of the link */
-    /* add generated code to html variable */
-    /* END LOOP: for each tag */
-    /* insert HTML of all the links into the tags wrapper */
-    /* END LOOP: for every article: */
+
+    for (let article of articles) {
+      /* find tags wrapper */
+      const tagsWrapper = article.querySelector(optArticleTagSelector);
+      console.log('tagsWrapper:', tagsWrapper);
+
+      /* make html variable with empty string */
+      // eslint-disable-next-line no-unused-vars
+      let html = '';
+
+      /* get tags from data-tags attribute */
+      const articleTags = article.getAttribute('data-tags');
+      console.log('articleTags:', articleTags);
+
+      /* split tags into array */
+      const articleTagsArray = articleTags.split(' ');
+      console.log('articleTagsArray:', articleTagsArray);
+
+      /* START LOOP: for each tag */
+      for (let tag of articleTagsArray) {
+        console.log('tag:', tag);
+        /* generate HTML of the link */
+        /* add generated code to html variable */
+        /* END LOOP: for each tag */
+      }
+      /* insert HTML of all the links into the tags wrapper */
+      /* END LOOP: for every article: */
+    }
   };
 
   generateTitleLinks();
