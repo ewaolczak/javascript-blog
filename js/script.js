@@ -123,6 +123,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     const presentage = normalizedCount / normalizedMax;
     const classNumber = Math.floor(presentage * (optCloudClassCount - 1) + 1);
     console.log('classNumber:', classNumber);
+    return classNumber;
   };
 
   const generateTags = function () {
@@ -189,6 +190,7 @@ document.getElementById('test-button').addEventListener('click', function () {
       /* [NEW] generate code of a link and add it to allTagsHTML */
       const tagLinkHTML =
         '<li><a class="' +
+        optCloudClassPrefix +
         calculateTagClass(allTags[tag], tagsParams) +
         '" href="#tag-' +
         tag +
@@ -199,6 +201,7 @@ document.getElementById('test-button').addEventListener('click', function () {
         allTags[tag] +
         ') ';
       allTagsHTML += tagLinkHTML;
+      console.log('allTagsHTML:', allTagsHTML);
 
       /* [NEW] END LOOP: for each tag in allTags: */
     }
