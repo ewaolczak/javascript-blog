@@ -47,7 +47,9 @@ document.getElementById('test-button').addEventListener('click', function () {
     optTitleListSelector = '.titles',
     optArticleTagSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post .post-author',
-    optTagsListSelector = '.tags.list';
+    optTagsListSelector = '.tags.list',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = 'tag-size-';
 
   const removeTitleList = function () {
     const titleList = document.querySelector(optTitleListSelector);
@@ -115,6 +117,14 @@ document.getElementById('test-button').addEventListener('click', function () {
     return params;
   };
 
+  const calculateTagClass = function (count, params) {
+    const normalizedCount = count - params.min;
+    const normalizedMax = params.max - params.min;
+    const presentage = normalizedCount / normalizedMax;
+    const classNumber = Math.floor(presentage * (optCloudClassCount - 1) + 1);
+    console.log('classNumber:', classNumber);
+  };
+
   const generateTags = function () {
     /* [NEW] create a new variable allTags with empty object */
     let allTags = {};
@@ -177,8 +187,10 @@ document.getElementById('test-button').addEventListener('click', function () {
     /* [NEW] START LOOP: for each tag in allTags: */
     for (let tag in allTags) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
-      allTagsHTML +=
-        '<li><a href="#tag-' +
+      const tagLinkHTML =
+        '<li><a class="' +
+        calculateTagClass(allTags[tag], tagsParams) +
+        '" href="#tag-' +
         tag +
         '">' +
         tag +
@@ -186,9 +198,10 @@ document.getElementById('test-button').addEventListener('click', function () {
         ' (' +
         allTags[tag] +
         ') ';
-    }
-    /* [NEW] END LOOP: for each tag in allTags: */
+      allTagsHTML += tagLinkHTML;
 
+      /* [NEW] END LOOP: for each tag in allTags: */
+    }
     /*[NEW] add HTML from allTagsHTML to tagList */
     tagList.innerHTML = allTagsHTML;
   };
