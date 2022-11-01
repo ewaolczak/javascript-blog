@@ -48,7 +48,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     optArticleTagSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post .post-author',
     optTagsListSelector = '.tags.list',
-    optCloudClassCount = 5,
+    optCloudClassCount = 3,
     optCloudClassPrefix = 'tag-size-';
 
   const removeTitleList = function () {
@@ -196,10 +196,7 @@ document.getElementById('test-button').addEventListener('click', function () {
         tag +
         '">' +
         tag +
-        '</a></li>' +
-        ' (' +
-        allTags[tag] +
-        ') ';
+        '</a></li>';
       allTagsHTML += tagLinkHTML;
       console.log('allTagsHTML:', allTagsHTML);
 
