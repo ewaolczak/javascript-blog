@@ -46,7 +46,8 @@ document.getElementById('test-button').addEventListener('click', function () {
     optTitleSelectior = '.post-title',
     optTitleListSelector = '.titles',
     optArticleTagSelector = '.post-tags .list',
-    optArticleAuthorSelector = '.post .post-author';
+    optArticleAuthorSelector = '.post .post-author',
+    optTagsListSelector = '.tags .list';
 
   const removeTitleList = function () {
     const titleList = document.querySelector(optTitleListSelector);
@@ -100,6 +101,9 @@ document.getElementById('test-button').addEventListener('click', function () {
   };
 
   const generateTags = function () {
+    /* [NEW] create a new variable allTags with empty array */
+    let allTags = [];
+
     /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
 
@@ -126,12 +130,17 @@ document.getElementById('test-button').addEventListener('click', function () {
         // console.log('tag:', tag);
 
         /* [DONE] generate HTML of the link */
-
         const tagHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
 
         /* [DONE] add generated code to html variable */
         html = html + tagHTML;
         // console.log('html:', html);
+
+        /* [NEW] check if this link is NOT already in allTags */
+        if (allTags.indexOf(tagHTML) == -1) {
+          /* [NEW] add generated code to allTags array */
+          allTags.push(tagHTML);
+        }
 
         /* [DONE] END LOOP: for each tag */
       }
@@ -140,6 +149,11 @@ document.getElementById('test-button').addEventListener('click', function () {
 
       /* [DONE] END LOOP: for every article: */
     }
+    /* [NEW] find list of tags in right column */
+    const tagList = document.querySelector(optTagsListSelector);
+
+    /* [NEW] add html from allTags to tagList */
+    tagList.innerHTML = allTags.join(' ');
   };
 
   const tagClickHandler = function (event) {
