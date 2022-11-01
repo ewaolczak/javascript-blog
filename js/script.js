@@ -200,38 +200,35 @@ document.getElementById('test-button').addEventListener('click', function () {
   };
 
   const generateAuthors = function () {
-    /* find all articles */
+    /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
 
-    /* START LOOP: fore every article */
+    /* [DONE] START LOOP: fore every article */
     for (let article of articles) {
       console.log('article', article);
 
-      /* find author wrapper */
+      /* [DONE] find author wrapper */
       const authorWrapper = article.querySelector(optArticleAuthorSelector);
       console.log('authorWrapper:', authorWrapper);
 
-      /* make html variable with empty string */
+      /* [DONE] make html variable with empty string */
       let html = '';
 
-      /* get authors from data-authors attribute */
-      const authors = article.getAttribute('data-author');
+      /* [DONE] get authors from data-authors attribute */
+      const author = article.getAttribute('data-author');
 
-      /* START LOOP: for each author */
-      for (let author of authors) {
-        console.log('author:', author);
+      /* [DONE] generate HTML of the link */
+      const authorHTML =
+        '<li><a href="#' + author + '">' + author + '</a></li>';
 
-        /* generate HTML of the link */
-        const authorHTML =
-          '<li><a href="#' + author + '">' + author + '</a></li>';
+      /* [DONE] add generated code to html variable */
+      html = html + authorHTML;
+      console.log('html:', html);
 
-        /* add generated code to html variable */
-        html = html + authorHTML;
-        console.log('html:', html);
-        /* END LOOP: for every author */
-      }
-      /* insert HTML of all the links into the authors wrapper */
-      /* END LOOP: for every article */
+      /* [DONE] insert HTML of all the links into the authors wrapper */
+      authorWrapper.innerHTML = 'by ' +  html;
+
+      /* [DONE] END LOOP: for every article */
     }
   };
 
