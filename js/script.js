@@ -160,7 +160,15 @@ document.getElementById('test-button').addEventListener('click', function () {
     /* [NEW] START LOOP: for each tag in allTags: */
     for (let tag in allTags) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
-      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+      allTagsHTML +=
+        '<li><a href="#tag-' +
+        tag +
+        '">' +
+        tag +
+        '</a></li>' +
+        ' (' +
+        allTags[tag] +
+        ') ';
     }
     /* [NEW] END LOOP: for each tag in allTags: */
 
