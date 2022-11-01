@@ -100,6 +100,21 @@ document.getElementById('test-button').addEventListener('click', function () {
     }
   };
 
+  const calculateTagsParams = function (tags) {
+    const params = {
+      max: 0,
+      min: 999999,
+    };
+
+    for (let tag in tags) {
+      console.log(tag + ' is used ' + tags[tag] + ' times');
+
+      params.max = Math.max(tags[tag], params.max);
+      params.min = Math.min(tags[tag], params.min);
+    }
+    return params;
+  };
+
   const generateTags = function () {
     /* [NEW] create a new variable allTags with empty object */
     let allTags = {};
@@ -155,6 +170,8 @@ document.getElementById('test-button').addEventListener('click', function () {
     const tagList = document.querySelector(optTagsListSelector);
 
     /* [NEW] create variable for all links HTML code */
+    const tagsParams = calculateTagsParams(allTags);
+    console.log('tagsParams', tagsParams);
     let allTagsHTML = '';
 
     /* [NEW] START LOOP: for each tag in allTags: */
