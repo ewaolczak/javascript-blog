@@ -47,7 +47,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     optTitleListSelector = '.titles',
     optArticleTagSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post .post-author',
-    optTagsListSelector = '.tags .list';
+    optTagsListSelector = '.tags.list';
 
   const removeTitleList = function () {
     const titleList = document.querySelector(optTitleListSelector);
