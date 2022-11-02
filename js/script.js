@@ -1,11 +1,37 @@
 {
   ('use strict');
+  // // eslint-disable-next-line no-unused-vars
+  // const templates = {
+  //   articleLink: Handlebars.compile(
+  //     document.querySelector('#template-article-link').innerHTML
+  //   ),
+  // };
+  const opts = {
+    tagSize: {
+      count: 3,
+      classPrefix: 'tag-size-',
+    },
+  };
 
-  /*
-document.getElementById('test-button').addEventListener('click', function () {
-	const links = document.querySelectorAll('.titles a');
-	console.log('links:', links);
-});*/
+  const select = {
+    all: {
+      articles: '.post',
+      linksTo: {
+        tags: 'a[href^="#tag-"]',
+        authors: 'a[href^="#author-"]',
+      },
+    },
+    article: {
+      tags: '.post-tags .list',
+      author: '.post-author',
+    },
+    listOf: {
+      postTitles: '.post-title',
+      titles: '.titles',
+      tags: '.tags.list',
+      authors: '.authors.list',
+    },
+  };
 
   const titleClickHandler = function (event) {
     // console.log('Link was clicked!');
@@ -43,20 +69,8 @@ document.getElementById('test-button').addEventListener('click', function () {
     targetArticle.classList.add('active');
   };
 
-  const opts = {
-    articleSelector: '.post',
-    titleSelector: '.post-title',
-    titleListSelector: '.titles',
-    articleTagSelector: '.post-tags .list',
-    articleAuthorSelector: '.post .post-author',
-    tagsListSelector: '.tags.list',
-    cloudClassCount: 3,
-    cloudClassPrefix: 'tag-size-',
-    authorsListSelector: '.authors.list',
-  };
-
   const removeTitleList = function () {
-    const titleList = document.querySelector(opts.titleListSelector);
+    const titleList = document.querySelector(select.listOf.titles);
     titleList.innerHTML = '';
   };
 
@@ -66,7 +80,7 @@ document.getElementById('test-button').addEventListener('click', function () {
 
     /* [DONE] for each article */
     const articles = document.querySelectorAll(
-      opts.articleSelector + customSelector
+      select.all.articles + customSelector
     );
 
     let html = '';
@@ -78,7 +92,9 @@ document.getElementById('test-button').addEventListener('click', function () {
 
       /* [DONE] find the title element */
       /* [DONE] get the title from the title element */
-      const articleTitle = article.querySelector(opts.titleSelector).innerHTML;
+      const articleTitle = article.querySelector(
+        select.listOf.postTitles
+      ).innerHTML;
       // console.log('articleTitle', articleTitle);
 
       /* [DONE] create HTML of the link */
@@ -94,7 +110,7 @@ document.getElementById('test-button').addEventListener('click', function () {
       html = html + linkHTML;
     }
 
-    const titleList = document.querySelector(opts.titleListSelector);
+    const titleList = document.querySelector(select.listOf.titles);
     titleList.innerHTML = html;
 
     const links = document.querySelectorAll('.titles a');
@@ -125,7 +141,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     const normalizedCount = count - params.min;
     const normalizedMax = params.max - params.min;
     const presentage = normalizedCount / normalizedMax;
-    const classNumber = Math.floor(presentage * (opts.cloudClassCount - 1) + 1);
+    const classNumber = Math.floor(presentage * (opts.tagSize.count - 1) + 1);
     // console.log('classNumber:', classNumber);
     return classNumber;
   };
@@ -135,13 +151,13 @@ document.getElementById('test-button').addEventListener('click', function () {
     let allTags = {};
 
     /* [DONE] find all articles */
-    const articles = document.querySelectorAll(opts.articleSelector);
+    const articles = document.querySelectorAll(select.all.articles);
 
     /* [DONE] START LOOP: for every article: */
 
     for (let article of articles) {
       /* find tags wrapper */
-      const tagsWrapper = article.querySelector(opts.articleTagSelector);
+      const tagsWrapper = article.querySelector(select.article.tags);
       // console.log('tagsWrapper:', tagsWrapper);
 
       /* [DONE] make html variable with empty string */
@@ -182,7 +198,7 @@ document.getElementById('test-button').addEventListener('click', function () {
       /* [DONE] END LOOP: for every article: */
     }
     /* [NEW] find list of tags in right column */
-    const tagList = document.querySelector(opts.tagsListSelector);
+    const tagList = document.querySelector(select.listOf.tags);
 
     /* [NEW] create variable for all links HTML code */
     const tagsParams = calculateTagsParams(allTags);
@@ -194,7 +210,7 @@ document.getElementById('test-button').addEventListener('click', function () {
       /* [NEW] generate code of a link and add it to allTagsHTML */
       const tagLinkHTML =
         '<li><a class="' +
-        opts.cloudClassPrefix +
+        opts.tagSize.classPrefix +
         calculateTagClass(allTags[tag], tagsParams) +
         '" href="#tag-' +
         tag +
@@ -227,7 +243,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     // console.log('tag:', tag);
 
     /* [DONE] find all tag links with class active */
-    const clickedTags = document.querySelectorAll('a.active[href^="#tag-"]');
+    const clickedTags = document.querySelectorAll(select.all.linksTo.tags);
     // console.log('clickedTags:', clickedTags);
 
     /* [DONE] START LOOP: for each active tag link */
@@ -272,14 +288,14 @@ document.getElementById('test-button').addEventListener('click', function () {
     let allAuthors = {};
 
     /* [DONE] find all articles */
-    const articles = document.querySelectorAll(opts.articleSelector);
+    const articles = document.querySelectorAll(select.all.articles);
 
     /* [DONE] START LOOP: fore every article */
     for (let article of articles) {
       // console.log('article', article);
 
       /* [DONE] find author wrapper */
-      const authorWrapper = article.querySelector(opts.articleAuthorSelector);
+      const authorWrapper = article.querySelector(select.article.author);
       // console.log('authorWrapper:', authorWrapper);
 
       /* [DONE] make html variable with empty string */
@@ -309,7 +325,7 @@ document.getElementById('test-button').addEventListener('click', function () {
     }
 
     /* [NEW] find list of authors in right column */
-    const authorList = document.querySelector(opts.authorsListSelector);
+    const authorList = document.querySelector(select.listOf.authors);
 
     /* [NEW] create variable for all links HTML code */
     let allAuthorsHTML = '';
@@ -342,7 +358,9 @@ document.getElementById('test-button').addEventListener('click', function () {
     console.log('author:', author);
 
     /* [DONE] find all author links with class active */
-    const clickedAuthors = document.querySelectorAll('a.active p[href^="#"]');
+    const clickedAuthors = document.querySelectorAll(
+      select.all.linksTo.authors
+    );
     console.log('clickedAuthor:', clickedAuthors);
 
     /* [DONE] START LOOP: for each active author link */
