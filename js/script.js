@@ -5,9 +5,13 @@
     articleLink: Handlebars.compile(
       document.querySelector('#template-article-link').innerHTML
     ),
+    tagLink: Handlebars.compile(
+      document.querySelector('#template-tag-link').innerHTML
+    ),
     tagCloudLink: Handlebars.compile(
       document.querySelector('#template-tag-cloud-link').innerHTML
     ),
+
     authorLink: Handlebars.compile(
       document.querySelector('#template-author-list-link').innerHTML
     ),
@@ -182,11 +186,11 @@
         // console.log('tag:', tag);
 
         /* [DONE] generate HTML of the link */
-        const tagHTMLData = { id: articleTags, title: tag };
-        const tagHTML = templates.articleLink(tagHTMLData);
+        const tagHTMLData = { tag: tag };
+        const tagHTML = templates.tagLink(tagHTMLData);
 
         /* [DONE] add generated code to html variable */
-        html = html + tagHTML;
+        html += tagHTML;
         // console.log('html:', html);
 
         /* [NEW] check if this link is NOT already in allTags */
@@ -225,7 +229,7 @@
     /*[NEW] add HTML from allTagsHTML to tagList */
     tagList.innerHTML = templates.tagCloudLink(allTagsData);
 
-    console.log('allTagsData:', allTagsData);
+    // console.log('allTagsData:', allTagsData);
   };
 
   const tagClickHandler = function (event) {
@@ -257,7 +261,7 @@
       /* [DONE] END LOOP: for each active tag link */
     }
     /* [DONE] find all tag links with "href" attribute equal to the "href" constant */
-    const tagLinks = document.querySelectorAll(select.all.linksTo.tags);
+    const tagLinks = document.querySelectorAll(`a[href^="#tag-${tag}"]`);
 
     /* [DONE] START LOOP: for each found tag link */
     for (let tagLink of tagLinks) {
@@ -359,7 +363,7 @@
     console.log('href:', href);
 
     /* [DONE] make a new constant "author" and extract tag from the "href" constant */
-    const author = href.replace('#', '');
+    const author = href.replace('#author-', '');
     console.log('author:', author);
 
     /* [DONE] find all author links with class active */

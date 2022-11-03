@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>my learning cheatpages</title>
+  <title>my blog</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -407,14 +407,25 @@
   <script id="template-article-link" type="text/x-handlebars-template">
     <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
   </script>
+  <script id="template-author-link" type="text/x-handlebars-template">
+    {{#each authors}}
+    <li><a href="#author-{{ author }}">{{ author }}</a></li>
+    {{/each}}
+  </script>
+  <script id="template-tag-link" type="text/x-handlebars-template">
+    {{#each tags}}
+    <li><a href="#tag-{{ tag }}"><span>{{ tag }}</span></a></li>
+    {{/each}}
+  </script>
   <script id="template-tag-cloud-link" type="text/x-handlebars-template">
     {{#each tags}}
     <li><a href="#tag-{{ tag }}" class="tag-size-{{ className }}">{{ tag }} ({{ count }})</a></li>
     {{/each}}
   </script>
+
   <script id="template-author-list-link" type="text/x-handlebars-template">
     {{#each authors}}
-    <li><a href="#{{ author }}">{{ author }}</a></li>
+    <li><a href="#author-{{ author }}">{{ author }}</a></li>
     {{/each}}
   </script>
   <script
