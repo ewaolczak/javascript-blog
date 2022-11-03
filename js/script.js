@@ -30,6 +30,8 @@
     article: {
       tags: '.post-tags .list',
       author: '.post-author',
+      titles: '.titles a.active',
+      activeArticle: '.posts article.active',
     },
     listOf: {
       postTitles: '.post-title',
@@ -44,7 +46,7 @@
     // console.log('event:', event);
 
     /* [DONE] remove class 'active' from all article links  */
-    const activeLinks = document.querySelectorAll('.titles a.active');
+    const activeLinks = document.querySelectorAll(select.article.titles);
 
     for (let activeLink of activeLinks) {
       activeLink.classList.remove('active');
@@ -57,7 +59,9 @@
     clickedElement.classList.add('active');
 
     /* [DONE] remove class 'active' from all articles */
-    const activeArticles = document.querySelectorAll('.posts article.active');
+    const activeArticles = document.querySelectorAll(
+      select.article.activeArticle
+    );
 
     for (let activeArticle of activeArticles) {
       activeArticle.classList.remove('active');
@@ -253,7 +257,7 @@
       /* [DONE] END LOOP: for each active tag link */
     }
     /* [DONE] find all tag links with "href" attribute equal to the "href" constant */
-    const tagLinks = document.querySelectorAll('a[href="' + href + '"]');
+    const tagLinks = document.querySelectorAll(select.all.linksTo.tags);
 
     /* [DONE] START LOOP: for each found tag link */
     for (let tagLink of tagLinks) {
@@ -269,7 +273,7 @@
 
   const addClickListenersToTags = function () {
     /* [DONE] find all links to tags */
-    const tagLinks = document.querySelectorAll('.post-tags .list a');
+    const tagLinks = document.querySelectorAll(select.all.linksTo.tags);
     // console.log('tagLinks:', tagLinks);
 
     /* [DONE] START LOOP: for each link */
@@ -372,7 +376,7 @@
       /* [DONE] END LOOP: for each active author link */
     }
     /* [DONE] find all author links with "href" attribute equal to the "href" constant */
-    const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+    const authorLinks = document.querySelectorAll(select.all.linksTo.authors);
     console.log('authorLinks:', authorLinks);
 
     /* [DONE] START LOOP: for each found author link */
@@ -389,7 +393,7 @@
 
   const addClickListenersToAuthors = function () {
     /* [DONE] find all links to authors */
-    const authorLinks = document.querySelectorAll('.post-author a');
+    const authorLinks = document.querySelectorAll(select.all.linksTo.authors);
     // console.log('authorLinks:', authorLinks);
 
     /* [DONE] START LOOP: for each link */
