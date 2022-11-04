@@ -11,9 +11,11 @@
     tagCloudLink: Handlebars.compile(
       document.querySelector('#template-tag-cloud-link').innerHTML
     ),
-
-    authorLink: Handlebars.compile(
+    authorListLink: Handlebars.compile(
       document.querySelector('#template-author-list-link').innerHTML
+    ),
+    authorLink: Handlebars.compile(
+      document.querySelector('#template-author-link').innerHTML
     ),
   };
   const opts = {
@@ -311,11 +313,12 @@
       const author = article.getAttribute('data-author');
 
       /* [DONE] generate HTML of the link */
-      const authorHTMLData = { id: author, title: author };
-      const authorHTML = templates.articleLink(authorHTMLData);
+      const authorHTMLData = { author: author };
+      const authorHTML = templates.authorLink({authorHTMLData});
+      console.log(authorHTML);
 
       /* [DONE] add generated code to html variable */
-      html = html + authorHTML;
+      html += authorHTML;
       // console.log('html:', html);
 
       /* [NEW] check if this link is NOT already in allAuthors */
@@ -346,7 +349,7 @@
       /* [NEW] END LOOP: for each tag in allAuthors: */
     }
     /*[NEW] add HTML from allAuthorsHTML to authorList */
-    authorList.innerHTML = templates.authorLink(allAuthorsData);
+    authorList.innerHTML = templates.authorListLink(allAuthorsData);
     console.log('allAuthorsData', allAuthorsData);
   };
 
@@ -379,17 +382,9 @@
 
       /* [DONE] END LOOP: for each active author link */
     }
-    /* [DONE] find all author links with "href" attribute equal to the "href" constant */
-    const authorLinks = document.querySelectorAll(select.all.linksTo.authors);
-    console.log('authorLinks:', authorLinks);
+    //   /* [DONE] add class active for clicked link */
+    clickedElement.classList.add('active');
 
-    /* [DONE] START LOOP: for each found author link */
-    for (let authorLink of authorLinks) {
-      /* [DONE] add class active for each link */
-      authorLink.classList.add('active');
-
-      /* [DONE] END LOOP: for each found author link */
-    }
     /* [DONE] execute function "generateTitleLinks" with article selector as argument */
     generateTitleLinks('[data-author="' + author + '"]');
     console.log(generateTitleLinks);
