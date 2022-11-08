@@ -314,7 +314,7 @@
 
       /* [DONE] generate HTML of the link */
       const authorHTMLData = { author: author };
-      const authorHTML = templates.authorLink({authorHTMLData});
+      const authorHTML = templates.authorLink(authorHTMLData);
       console.log(authorHTML);
 
       /* [DONE] add generated code to html variable */
